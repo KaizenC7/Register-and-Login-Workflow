@@ -192,7 +192,11 @@ app.get("/api/password-rules", (req, res) => {
 
 app.get("/health", (req, res) => res.json({ ok: true }));
 
-app.listen(PORT, () => {
-  console.log(`SecureID registration backend running on http://localhost:${PORT}`);
-  console.log(`OTP TTL: ${OTP_TTL_MS / 1000}s | Resend cooldown: ${RESEND_COOLDOWN_MS / 1000}s`);
-});
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`SecureID registration backend running on http://localhost:${PORT}`);
+    console.log(`OTP TTL: ${OTP_TTL_MS / 1000}s | Resend cooldown: ${RESEND_COOLDOWN_MS / 1000}s`);
+  });
+}
+
+module.exports = app;
