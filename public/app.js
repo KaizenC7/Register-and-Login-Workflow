@@ -1,7 +1,7 @@
 (() => {
   "use strict";
 
-  const API_BASE = ""; // same-origin
+  const API_BASE = (document.querySelector('meta[name="secureid-api-base"]')?.content || "").replace(/\/$/, "");
 
   const screens = {};
   const progressLabels = document.querySelectorAll(".step-label");
