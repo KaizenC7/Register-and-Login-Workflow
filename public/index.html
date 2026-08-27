@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SecureID — Create your account</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand">
+    <span class="brand-mark">S</span>
+    <span class="brand-name">SecureID</span>
+  </div>
+  <div class="web-step-label" id="web-step-label">1. Register - Details</div>
+</div>
+
+<main class="stage">
+
+  <!-- ============ SCREEN 1: Registration form ============ -->
+  <section class="card" data-screen="register" hidden>
+    <div class="journey-progress">
+      <div class="steps" aria-label="Registration progress">
+        <div class="step active" data-step="1"><span class="step-circle">1</span></div>
+        <div class="step-line"></div>
+        <div class="step" data-step="2"><span class="step-circle">2</span></div>
+        <div class="step-line"></div>
+        <div class="step" data-step="3"><span class="step-circle">3</span></div>
+        <div class="step-line"></div>
+        <div class="step" data-step="4"><span class="step-circle">4</span></div>
+        <div class="step-line"></div>
+        <div class="step" data-step="5"><span class="step-circle">5</span></div>
+      </div>
+    </div>
+
+    <h1>Create your account</h1>
+    <p class="subtitle">Let's get you started</p>
+
+    <form id="register-form" class="register-grid" novalidate>
+      <div class="g-fullname">
+        <label class="field">
+          <span>Full Name</span>
+          <input type="text" name="fullName" autocomplete="name" placeholder="Priya Sharma" required />
+          <small class="field-error" data-error-for="fullName"></small>
+        </label>
+      </div>
+
+      <div class="g-email">
+        <label class="field">
+          <span>Email</span>
+          <input type="email" name="email" autocomplete="email" placeholder="priya.sharma@email.com" required />
+          <small class="field-error" data-error-for="email"></small>
+        </label>
+      </div>
+
+      <div class="g-mobile">
+        <label class="field">
+          <span>Mobile Number</span>
+          <div class="mobile-row">
+            <span class="mobile-prefix">+91</span>
+            <input type="tel" name="mobile" autocomplete="tel" placeholder="98765 43210" required />
+          </div>
+          <small class="field-error" data-error-for="mobile"></small>
+        </label>
+      </div>
+
+      <div class="g-password">
+        <label class="field">
+          <span>Password</span>
+          <div class="password-row">
+            <input type="password" name="password" autocomplete="new-password" required />
+            <button type="button" class="ghost-icon-btn" id="toggle-password" aria-label="Show password">👁</button>
+          </div>
+          <small class="field-error" data-error-for="password"></small>
+        </label>
+      </div>
+
+      <div class="g-rules form-rules-panel">
+        <p class="rules-heading">Password must contain:</p>
+        <ul class="pw-checklist" id="pw-checklist">
+          <li data-rule="length">At least 8 characters</li>
+          <li data-rule="uppercase">1 uppercase letter</li>
+          <li data-rule="number">1 number</li>
+          <li data-rule="special">1 special character</li>
+        </ul>
+      </div>
+
+      <div class="g-checkbox">
+        <label class="checkbox-row">
+          <input type="checkbox" name="agreeToTerms" required />
+          <span>I agree to the <a href="#" tabindex="-1">Terms &amp; Conditions</a> and <a href="#" tabindex="-1">Privacy Policy</a></span>
+        </label>
+        <small class="field-error" data-error-for="agreeToTerms"></small>
+      </div>
+
+      <div class="g-alert">
+        <div class="form-alert" id="register-alert" hidden></div>
+      </div>
+
+      <div class="g-submit">
+        <button type="submit" class="btn-primary" id="register-submit">Create Account</button>
+      </div>
+
+      <div class="g-login">
+        <p class="foot-link">Already have an account? <a href="#" id="go-to-login-link">Login</a></p>
+      </div>
+    </form>
+  </section>
+
+  <!-- ============ SCREEN 2/3: OTP verification (shared template) ============ -->
+  <section class="card otp-card" data-screen="otp" hidden>
+    <div class="journey-progress">
+      <div class="steps" aria-label="Registration progress">
+        <div class="step active" data-step="1"><span class="step-circle">1</span></div>
+        <div class="step-line"></div>
+        <div class="step" data-step="2"><span class="step-circle">2</span></div>
+        <div class="step-line"></div>
+        <div class="step" data-step="3"><span class="step-circle">3</span></div>
+        <div class="step-line"></div>
+        <div class="step" data-step="4"><span class="step-circle">4</span></div>
+        <div class="step-line"></div>
+        <div class="step" data-step="5"><span class="step-circle">5</span></div>
+      </div>
+    </div>
+
+    <button type="button" class="back-btn" id="otp-back-btn" aria-label="Go back">←</button>
+
+    <div class="icon-badge" id="otp-icon">✉</div>
+
+    <h1 id="otp-title">Verify your email</h1>
+    <p class="subtitle" id="otp-subtitle">We have sent a 6-digit code to<br /><strong id="otp-destination">you</strong></p>
+
+    <div class="otp-inputs" id="otp-inputs">
+      <input inputmode="numeric" maxlength="1" class="otp-box" data-idx="0" />
+      <input inputmode="numeric" maxlength="1" class="otp-box" data-idx="1" />
+      <input inputmode="numeric" maxlength="1" class="otp-box" data-idx="2" />
+      <input inputmode="numeric" maxlength="1" class="otp-box" data-idx="3" />
+      <input inputmode="numeric" maxlength="1" class="otp-box" data-idx="4" />
+      <input inputmode="numeric" maxlength="1" class="otp-box" data-idx="5" />
+    </div>
+
+    <div class="otp-status" id="otp-status"></div>
+
+    <p class="otp-timer" id="otp-timer">Code expires in <span id="otp-countdown">03:00</span></p>
+
+    <button type="button" class="link-action" id="otp-resend-btn" disabled>
+      Resend code (<span id="resend-countdown">00:25</span>)
+    </button>
+
+    <p class="foot-link muted" id="otp-secondary-action">
+      <a href="#" id="otp-secondary-link">Didn't receive the code?</a>
+    </p>
+    <p class="foot-link muted" id="otp-change-detail" hidden></p>
+  </section>
+
+  <!-- ============ SCREEN 4: Authenticator setup ============ -->
+  <section class="card setup-card" data-screen="setup" hidden>
+    <div class="journey-progress">
+      <div class="steps" aria-label="Registration progress">
+        <div class="step done" data-step="1"><span class="step-circle">1</span></div>
+        <div class="step-line done"></div>
+        <div class="step done" data-step="2"><span class="step-circle">2</span></div>
+        <div class="step-line done"></div>
+        <div class="step done" data-step="3"><span class="step-circle">3</span></div>
+        <div class="step-line done"></div>
+        <div class="step active" data-step="4"><span class="step-circle">4</span></div>
+        <div class="step-line"></div>
+        <div class="step" data-step="5"><span class="step-circle">5</span></div>
+      </div>
+    </div>
+
+    <button type="button" class="back-btn" id="setup-back-btn" aria-label="Go back">←</button>
+    <h1>Scan QR Code</h1>
+    <p class="subtitle">Open your authenticator app and<br />scan this QR code</p>
+    <img class="setup-qr" id="setup-qr" alt="Authenticator setup QR code" />
+    <button type="button" class="link-action setup-key" id="setup-key">Can't scan? Enter setup key</button>
+    <div class="setup-actions">
+      <button type="button" class="btn-secondary setup-web-back" id="setup-web-back-btn">Back</button>
+      <button type="button" class="btn-secondary setup-continue" id="setup-continue">Continue</button>
+    </div>
+  </section>
+
+  <!-- ============ SCREEN 4: Registration success ============ -->
+  <section class="card success-card" data-screen="success" hidden>
+    <div class="journey-progress">
+      <div class="steps" aria-label="Registration progress">
+        <div class="step active" data-step="1"><span class="step-circle">1</span></div>
+        <div class="step-line"></div>
+        <div class="step" data-step="2"><span class="step-circle">2</span></div>
+        <div class="step-line"></div>
+        <div class="step" data-step="3"><span class="step-circle">3</span></div>
+        <div class="step-line"></div>
+        <div class="step" data-step="4"><span class="step-circle">4</span></div>
+        <div class="step-line"></div>
+        <div class="step" data-step="5"><span class="step-circle">5</span></div>
+      </div>
+    </div>
+
+    <div class="icon-badge success">✓</div>
+    <h1>Account created!</h1>
+    <p class="subtitle">Your account has been successfully created and MFA is enabled.</p>
+
+    <ul class="success-list">
+      <li>✔ Email verified</li>
+      <li>✔ Mobile verified</li>
+      <li>✔ MFA enabled</li>
+    </ul>
+
+    <button type="button" class="btn-primary" id="continue-to-login">Continue to Login</button>
+  </section>
+
+  <!-- ============ Placeholder Login screen (out of scope target) ============ -->
+  <section class="card" data-screen="login" hidden>
+    <h1>Login</h1>
+    <p class="subtitle">Registration is complete for this demo. Wire this screen up to <code>POST /api/login</code> next.</p>
+    <button type="button" class="btn-secondary" id="back-to-register">Back to registration</button>
+  </section>
+
+</main>
+
+<footer class="page-footer">© 2026 SecureID. All rights reserved.</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
